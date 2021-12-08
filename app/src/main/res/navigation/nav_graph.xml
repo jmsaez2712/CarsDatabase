@@ -8,6 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.saezgarcia.carsdatabase.view.fragments.CarsListFragment"
+        android:label="Cars List"
         tools:layout="@layout/fragment_cars_list">
 
 
@@ -18,11 +19,21 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.saezgarcia.carsdatabase.view.fragments.AddCarFragment"
+        android:label="Cars"
         tools:layout="@layout/fragment_add_car">
 
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/typeFragment"
+        android:name="com.saezgarcia.carsdatabase.view.fragments.TypeFragment"
+        android:label="Types"
+        tools:layout="@layout/fragment_type">
+        <action
+            android:id="@+id/action_typeFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

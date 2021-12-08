@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavHostController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -66,12 +69,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.types_opt:
+                Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main).navigate(R.id.typeFragment);
+                return true;
+        }
+
+        return false;
     }
 
 

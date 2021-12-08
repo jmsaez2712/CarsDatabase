@@ -71,7 +71,7 @@ public class AddCarFragment extends Fragment {
     private Button btAddEdit, btCancel, btDelete;
     private Uri selectedUri;
     private String defaultPhoto = "https://illustoon.com/photo/1742.png";
-    private boolean typesLoaded = false;
+    private static boolean firstType = false;
 
     private Bundle bundle;
 
@@ -116,25 +116,20 @@ public class AddCarFragment extends Fragment {
 
     private void loadSpinner() {
         cvm.getTypes().observe(getViewLifecycleOwner(), types -> {
-        if(types.size() < 11){
-            Type type = new Type();
-            type.id = 0;
-            type.name = getString(R.string.default_select);
-            types.add(0, type);
+            if(firstType){
+                Type type = new Type();
+                type.id = 0;
+                type.name = getString(R.string.default_select);
+                types.add(0, type);
+                firstType = false;
+            }
             ArrayAdapter<Type> adapter =
                     new ArrayAdapter<Type>(this.getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, types);
             this.spType.setAdapter(adapter);
             try{
                 this.spType.setSelection(car.idtype);
             } catch (Exception e){}
-        } else {
-            ArrayAdapter<Type> adapter =
-                    new ArrayAdapter<Type>(this.getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, types);
-            this.spType.setAdapter(adapter);
-            try{
-                this.spType.setSelection(car.idtype);
-            } catch (Exception e){}
-        }
+
         });
     }
 
@@ -184,6 +179,7 @@ public class AddCarFragment extends Fragment {
             cvm.deleteCar(car);
             wasDeleted();
             NavHostFragment.findNavController(this).popBackStack();
+            firstType = true;
         });
 
         pickImageEdit();

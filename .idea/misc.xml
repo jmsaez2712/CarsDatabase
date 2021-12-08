@@ -10,12 +10,15 @@
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout-sw600dp/fragment_cars_list.xml" value="0.275" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout-sw600dp/item_car.xml" value="0.275" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout/activity_type.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout/fragment_add_car.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout/fragment_cars_list.xml" value="0.33" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout/fragment_item_list.xml" value="0.1" />
+        <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout/fragment_type.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout/item_car.xml" value="0.33" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/layout/list_item.xml" value="0.2677083333333333" />
+        <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/menu/menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase/app/src/main/res/menu/top_menu.xml" value="0.36666666666666664" />
       </map>
     </option>

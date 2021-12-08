@@ -31,6 +31,9 @@ public class CarRepository {
     private int resultCarDelete;
     private List<Long> resultCarsInsert;
 
+    private int resultTypeUpdate;
+    private int resultTypeDelete;
+
     private LiveData<List<Car>> liveCarList;
     private LiveData<List<CarType>> liveCarTypeList;
     private LiveData<List<Type>> liveTypeList;
@@ -42,6 +45,9 @@ public class CarRepository {
     private MutableLiveData<Long> liveInsertCar;
     private MutableLiveData<Integer> liveUpdateCar;
     private MutableLiveData<Integer> liveDeleteCar;
+    private MutableLiveData<Integer> liveUpdateType;
+    private MutableLiveData<Integer> liveDeleteType;
+    private MutableLiveData<Long> liveInsertType;
 
     public CarRepository(Context context) {
         CarDatabase db = CarDatabase.getDatabase(context);
@@ -49,12 +55,54 @@ public class CarRepository {
         liveInsertCar = new MutableLiveData<>();
         liveUpdateCar = new MutableLiveData<>();
         liveDeleteCar = new MutableLiveData<>();
+        liveInsertType = new MutableLiveData<>();
+        liveUpdateType = new MutableLiveData<>();
+        liveDeleteType = new MutableLiveData<>();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if(!getInit()){
             preloadTypes();
             setInit();
         }
         
+    }
+
+    public MutableLiveData<Long> getLiveInsertType() {
+        return liveInsertType;
+    }
+
+    public MutableLiveData<Integer> getLiveUpdateType() {
+        return liveUpdateType;
+    }
+
+    public MutableLiveData<Integer> getLiveDeleteType() {
+        return liveDeleteType;
+    }
+
+    public long insertType(Type type) {
+        Runnable r  = () ->{
+            resultTypeInsert = carDao.insertType(type);
+            liveInsertType.postValue(resultTypeInsert);
+        };
+        new Thread(r).start();
+        return this.resultTypeInsert;
+    }
+
+    public int updateType(Type type) {
+        Runnable r = () ->{
+            resultTypeUpdate = carDao.updateType(type);
+            liveUpdateType.postValue(resultTypeUpdate);
+        };
+        new Thread(r).start();
+        return resultTypeUpdate;
+    }
+
+    public int deleteType(Type type) {
+        Runnable r = ()->{
+            resultTypeDelete = carDao.deleteType(type);
+            liveDeleteType.postValue(resultTypeDelete);
+        };
+        new Thread(r).start();;
+        return resultTypeDelete;
     }
 
     public MutableLiveData<Long> getLiveInsertCar() {
@@ -76,6 +124,8 @@ public class CarRepository {
         return resultCarInsert;
     }
 
+
+
     public void insertCarType(Car car, Type type){
         Runnable r = () ->{
             car.idtype = (int) insertTypeGetId(type);
@@ -84,14 +134,6 @@ public class CarRepository {
             }
         };
         new Thread(r).start();
-    }
-
-    public long insertType(Type type) {
-        Runnable r  = () ->{
-            resultTypeInsert = carDao.insertType(type);
-        };
-        new Thread(r).start();
-        return this.resultTypeInsert;
     }
 
 

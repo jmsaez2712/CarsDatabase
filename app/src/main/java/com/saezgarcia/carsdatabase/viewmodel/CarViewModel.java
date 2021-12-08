@@ -84,4 +84,24 @@ public class CarViewModel extends AndroidViewModel {
     public MutableLiveData<Integer> getLiveDeleteCar() {
         return carRepository.getLiveDeleteCar();
     }
+
+    public MutableLiveData<Long> getLiveInsertType() {
+        return carRepository.getLiveInsertType();
+    }
+
+    public MutableLiveData<Integer> getLiveUpdateType() {
+        return carRepository.getLiveUpdateType();
+    }
+
+    public MutableLiveData<Integer> getLiveDeleteType() {
+        return carRepository.getLiveDeleteType();
+    }
+
+    public int updateType(Type type) {
+        return carRepository.updateType(type);
+    }
+
+    public int deleteType(Type type) {
+        return carRepository.deleteType(type);
+    }
 }

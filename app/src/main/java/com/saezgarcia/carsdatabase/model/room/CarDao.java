@@ -35,6 +35,12 @@ public interface CarDao {
     @Delete
     int deleteCar(Car car);
 
+    @Update
+    int updateType(Type type);
+
+    @Delete
+    int deleteType(Type type);
+
     @Query("SELECT * FROM cars WHERE id = :id ")
     LiveData<Car> getCar(long id);
 
