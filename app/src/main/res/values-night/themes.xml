@@ -1,0 +1,55 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.CarsDatabase" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/DarkprimaryColor</item>
+        <item name="colorPrimaryVariant">@color/DarkprimaryLightColor</item>
+        <item name="colorOnPrimary">@color/DarkprimaryTextColor</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/DarksecondaryColor</item>
+        <item name="colorSecondaryVariant">@color/DarksecondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/DarksecondaryLightColor</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="toolbarStyle">@style/toolbar</item>
+        <item name="textInputStyle">@style/textInput</item>
+        <item name="materialButtonStyle">@style/materialButton</item>
+        <item name="floatingActionButtonStyle">@style/fabStyle</item>
+
+    </style>
+
+
+    <style name="toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:backgroundTint">@color/DarkprimaryColor</item>
+        <item name="titleTextColor">@color/white</item>
+    </style>
+
+    <style name="textInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColorHint">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="materialThemeOverlay">@style/colorUnderline</item>
+    </style>
+
+    <style name="materialButton" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">50dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="elevation">15dp</item>
+    </style>
+
+    <style name="fabStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/black</item>
+    </style>
+
+    <style name="colorUnderline" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="colorPrimary">@color/white</item>
+    </style>
+
+    <style name="Theme.CarsDatabase.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+    <style name="Theme.CarsDatabase.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+</resources>
