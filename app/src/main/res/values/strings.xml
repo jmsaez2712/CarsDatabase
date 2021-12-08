@@ -31,4 +31,8 @@
     <string name="go_to_types">Go to types</string>
     <string name="add_type">Add Type</string>
     <string name="delete_edit_type">Delete / Edit Type</string>
+    <string name="support_text_delete_type">To Edit, select a type and write the new name.\n To delete, select the type to delete</string>
+    <string name="support_text_add_type">To Add a type, simply write the name on the input</string>
+    <string name="hint_add_type">Add type</string>
+    <string name="hint_edit_delete_type">New name</string>
 </resources>

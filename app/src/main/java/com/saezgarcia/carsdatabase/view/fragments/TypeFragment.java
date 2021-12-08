@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.saezgarcia.carsdatabase.R;
@@ -31,6 +32,7 @@ public class TypeFragment extends Fragment {
 
     private CarViewModel cvm;
     private Spinner spType;
+
     private EditText etNameType;
     private TextInputLayout tlNameType;
     private Button btEdit, btDelete, btCancel;
@@ -38,6 +40,7 @@ public class TypeFragment extends Fragment {
     private RadioGroup rbGroup;
     private static boolean firstType = true;
     private ArrayAdapter<Type> adapter;
+    private TextView tvSupport;
 
     public TypeFragment() {
         // Required empty public constructor
@@ -60,8 +63,13 @@ public class TypeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        firstType = true;
         initialize(view);
 
+        if(cbAdd.isChecked()){
+            loadSpinner();
+            loadAdd();
+        }
 
         cbAdd.setOnCheckedChangeListener((compoundButton, b) -> {
             if(cbAdd.isChecked()){
@@ -117,6 +125,8 @@ public class TypeFragment extends Fragment {
         cbEdit = view.findViewById(R.id.rbEdit);
         rbGroup = view.findViewById(R.id.rbGroup);
 
+        tvSupport = view.findViewById(R.id.tvSupport);
+
         getViewModel();
     }
 
@@ -139,16 +149,22 @@ public class TypeFragment extends Fragment {
 
     private void loadAdd(){
 
-        //loadSpinner();
-
         spType.setEnabled(false);
 
         btDelete.setVisibility(View.GONE);
 
         btEdit.setText("Add");
+        tlNameType.setHint(R.string.hint_add_type);
+        tvSupport.setText(R.string.support_text_add_type);
+
         btEdit.setOnClickListener((View v)->{
             Type type = createType();
             cvm.insertType(type);
+            cvm.getLiveInsertType().observe(getViewLifecycleOwner(), aLong -> {
+                if(aLong > 0){
+                    NavHostFragment.findNavController(this).navigate(R.id.action_typeFragment_to_FirstFragment);
+                }
+            });
         });
 
         btCancel.setOnClickListener((View v)->{
@@ -164,9 +180,11 @@ public class TypeFragment extends Fragment {
         btDelete.setVisibility(View.VISIBLE);
 
         btEdit.setText("Edit");
+        tlNameType.setHint(R.string.hint_edit_delete_type);
+        tvSupport.setText(R.string.support_text_delete_type);
         btEdit.setOnClickListener((View v)->{
             Type type = updateType();
-            cvm.insertType(type);
+            cvm.updateType(type);
             cvm.getLiveUpdateType().observe(getViewLifecycleOwner(), integer -> {
                 if(integer == 1){
                     NavHostFragment.findNavController(this).navigate(R.id.action_typeFragment_to_FirstFragment);
