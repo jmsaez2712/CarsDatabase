@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_typeFragment"
+            app:destination="@id/typeFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"

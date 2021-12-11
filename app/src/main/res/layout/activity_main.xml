@@ -16,7 +16,7 @@
         app:theme="@style/Theme.CarsDatabase.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbarFragment"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -25,6 +25,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
+        android:id="@+id/include"
         layout="@layout/content_main"
         android:layout_width="0dp"
         android:layout_height="0dp"
