@@ -3,7 +3,7 @@ CarsDatabase is a app with a ROOM database bases on the Model-View-ViewModel arc
 
 Main Screen of the app:
 
-![Main Screen of the app](ScreenshotsDB/ScreenshotMain.png?raw=true)
+![Main Screen of the app](ScreenshotsDB/mainScreen.png?raw=true)
 
 Add Screen:
 
