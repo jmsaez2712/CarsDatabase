@@ -71,7 +71,7 @@ public class AddCarFragment extends Fragment {
     private Button btAddEdit, btCancel, btDelete;
     private Uri selectedUri;
     private String defaultPhoto = "https://illustoon.com/photo/1742.png";
-    private static boolean firstType = false;
+    private static boolean firstType = true;
 
     private Bundle bundle;
 
@@ -165,10 +165,9 @@ public class AddCarFragment extends Fragment {
                 if (isCarValid(c)) {
                     cvm.updateCar(c);
                     wasUpdated();
-                    NavHostFragment.findNavController(this).popBackStack();
                 } else {
                     showEmpty();
-                    Toast.makeText(getContext(), "se mamo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Something was wrong", Toast.LENGTH_LONG).show();
                 }
             }catch (Exception e){
                 showEmpty();
@@ -176,10 +175,7 @@ public class AddCarFragment extends Fragment {
         });
 
         btDelete.setOnClickListener((View v)->{
-            cvm.deleteCar(car);
-            wasDeleted();
-            NavHostFragment.findNavController(this).popBackStack();
-            firstType = true;
+           alert();
         });
 
         pickImageEdit();
@@ -212,7 +208,6 @@ public class AddCarFragment extends Fragment {
                 if(isCarValid(c)){
                     cvm.insertCar(c);
                     wasInserted();
-                    NavHostFragment.findNavController(this).popBackStack();
                 } else {
                     showEmpty();
                     Toast.makeText(getContext(), "Error inserting", Toast.LENGTH_LONG).show();
@@ -386,6 +381,7 @@ public class AddCarFragment extends Fragment {
             Log.v("XXX", ""+car);
             if(car.longValue() > 0){
                 Toast.makeText(getContext(), "Car inserted", Toast.LENGTH_LONG).show();
+                NavHostFragment.findNavController(this).popBackStack();
             } else {
                 Toast.makeText(getContext(), "Error inserting car", Toast.LENGTH_LONG).show();
             }
@@ -397,6 +393,7 @@ public class AddCarFragment extends Fragment {
             Log.v("XXX", ""+car);
             if(car > 0){
                 Toast.makeText(getContext(), "Car updated", Toast.LENGTH_LONG).show();
+                NavHostFragment.findNavController(this).popBackStack();
             } else {
                 Toast.makeText(getContext(), "Error updating car", Toast.LENGTH_LONG).show();
             }
@@ -407,6 +404,7 @@ public class AddCarFragment extends Fragment {
         cvm.getLiveDeleteCar().observe(getViewLifecycleOwner(), car ->{
             if(car > 0){
                 Toast.makeText(getContext(), "Car deleted", Toast.LENGTH_LONG).show();
+                NavHostFragment.findNavController(this).popBackStack();
             } else {
                 Toast.makeText(getContext(), "Error deleting car", Toast.LENGTH_LONG).show();
             }
@@ -572,5 +570,30 @@ public class AddCarFragment extends Fragment {
             tlDate.setError("");
             tlDate.setErrorEnabled(false);
         }
+    }
+
+    private void alert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete Car")
+                .setMessage("Are you totally sure? This action can not be rejected")
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        cvm.deleteCar(car);
+                        wasDeleted();
+                        Toast.makeText(getContext(), "The car was deleted", Toast.LENGTH_SHORT).show();
+                        NavHostFragment.findNavController(AddCarFragment.this).popBackStack();
+                        firstType = true;
+                    }
+                });
+        builder.create().show();
     }
 }

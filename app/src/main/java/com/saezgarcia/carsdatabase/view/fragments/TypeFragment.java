@@ -1,14 +1,20 @@
 package com.saezgarcia.carsdatabase.view.fragments;
 
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +27,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.saezgarcia.carsdatabase.R;
@@ -158,19 +165,23 @@ public class TypeFragment extends Fragment {
         tvSupport.setText(R.string.support_text_add_type);
 
         btEdit.setOnClickListener((View v)->{
-            Type type = createType();
-            cvm.insertType(type);
-            cvm.getLiveInsertType().observe(getViewLifecycleOwner(), aLong -> {
-                if(aLong > 0){
-                    NavHostFragment.findNavController(this).navigate(R.id.action_typeFragment_to_FirstFragment);
-                }
-            });
+            if(emptyField()) {
+                Type type = createType();
+                cvm.insertType(type);
+                cvm.getLiveInsertType().observe(getViewLifecycleOwner(), aLong -> {
+                    if (aLong > 0) {
+                        Toast.makeText(getContext(), "Type inserted", Toast.LENGTH_LONG).show();
+                        NavHostFragment.findNavController(this).navigate(R.id.action_typeFragment_to_FirstFragment);
+                    }
+                });
+            }
         });
 
         btCancel.setOnClickListener((View v)->{
             NavHostFragment.findNavController(this).navigate(R.id.action_typeFragment_to_FirstFragment);
         });
 
+        checkEmpty();
     }
 
     private void loadEdit(){
@@ -183,29 +194,93 @@ public class TypeFragment extends Fragment {
         tlNameType.setHint(R.string.hint_edit_delete_type);
         tvSupport.setText(R.string.support_text_delete_type);
         btEdit.setOnClickListener((View v)->{
-            Type type = updateType();
-            cvm.updateType(type);
-            cvm.getLiveUpdateType().observe(getViewLifecycleOwner(), integer -> {
-                if(integer == 1){
-                    NavHostFragment.findNavController(this).navigate(R.id.action_typeFragment_to_FirstFragment);
-                }
-            });
+            if(emptyField()) {
+                Type type = updateType();
+                cvm.updateType(type);
+                cvm.getLiveUpdateType().observe(getViewLifecycleOwner(), integer -> {
+                    if (integer == 1) {
+                        NavHostFragment.findNavController(this).navigate(R.id.action_typeFragment_to_FirstFragment);
+                    }
+                });
+            }
         });
 
         btDelete.setOnClickListener((View v)->{
-            Type type = deleteType();
-            cvm.deleteType(type);
-            cvm.getLiveDeleteType().observe(getViewLifecycleOwner(), integer -> {
-                if(integer == 1){
-                    NavHostFragment.findNavController(this).navigate(R.id.action_typeFragment_to_FirstFragment);
-                }
-            });
+            alert();
         });
 
 
         btCancel.setOnClickListener((View v)->{
             NavHostFragment.findNavController(this).navigate(R.id.action_typeFragment_to_FirstFragment);
         });
+
+        checkEmpty();
     }
 
+    private void alert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete Car")
+                .setMessage("Are you totally sure? This action can not be rejected")
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Type type = deleteType();
+                        cvm.deleteType(type);
+                        cvm.getLiveDeleteType().observe(getViewLifecycleOwner(), integer -> {
+                            if(integer == 1){
+                                Toast.makeText(getContext(), "The car was deleted", Toast.LENGTH_SHORT).show();
+                                NavHostFragment.findNavController(TypeFragment.this).navigate(R.id.action_typeFragment_to_FirstFragment);
+                            }
+                        });
+                        firstType = true;
+                    }
+                });
+        builder.create().show();
+    }
+
+    private void checkEmpty(){
+        etNameType.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.length() <= 0){
+                   tlNameType.setErrorEnabled(true);
+                   tlNameType.setError(getString(R.string.error_field));
+                } else {
+                    tlNameType.setError("");
+                    tlNameType.setErrorEnabled(false);
+                }
+            }
+        });
+    }
+
+    private boolean emptyField(){
+        if(etNameType.getText().toString().isEmpty()){
+            tlNameType.setErrorEnabled(true);
+            tlNameType.setError(getText(R.string.empty_field));
+            return false;
+        } else {
+            tlNameType.setError("");
+            tlNameType.setErrorEnabled(false);
+        }
+
+        return true;
+    }
 }

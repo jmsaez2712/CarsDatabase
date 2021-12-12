@@ -28,7 +28,7 @@
     <string name="brand_model">brand, model</string>
     <string name="hp_">hp</string>
     <string name="year_">year</string>
-    <string name="go_to_types">Go to types</string>
+    <string name="go_to_types">Add/Edit types</string>
     <string name="add_type">Add Type</string>
     <string name="delete_edit_type">Delete / Edit Type</string>
     <string name="support_text_delete_type">To Edit, select a type and write the new name.\n To delete, select the type to delete</string>
