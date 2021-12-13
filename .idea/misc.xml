@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase-master - copia/CarsDatabase-master/app/src/main/res/drawable/add_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase-master - copia/CarsDatabase-master/app/src/main/res/layout-night/fragment_add_car.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase-master - copia/CarsDatabase-master/app/src/main/res/layout-sw600dp/fragment_add_car.xml" value="0.33" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase-master - copia/CarsDatabase-master/app/src/main/res/layout/activity_main.xml" value="0.2884963768115942" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase-master - copia/CarsDatabase-master/app/src/main/res/layout/fragment_add_car.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Jose Manuel/Documents/AndroidStudio/CarsDatabase-master - copia/CarsDatabase-master/app/src/main/res/layout/fragment_cars_list.xml" value="0.2884963768115942" />

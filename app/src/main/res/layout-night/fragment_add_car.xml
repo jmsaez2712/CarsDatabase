@@ -21,7 +21,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etBrand"
-            style="@style/text_edit_color_dark"
+            style="@style/text_edit_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/brand"
@@ -42,7 +42,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etModel"
-            style="@style/text_edit_color_dark"
+            style="@style/text_edit_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/model"
@@ -63,10 +63,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etYear"
-            style="@style/text_edit_color_dark"
+            style="@style/text_edit_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/year"
+            android:inputType="number"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,15 +84,16 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etHp"
-            style="@style/text_edit_color_dark"
+            style="@style/text_edit_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hp"
+            android:inputType="number"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
-        android:textAppearance="@style/TextStyle"
+        style="@style/Theme.AppCompat.NoActionBar"
         android:id="@+id/spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -163,7 +165,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etDate"
-            style="@style/text_edit_color_dark"
+            style="@style/text_edit_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/date"
