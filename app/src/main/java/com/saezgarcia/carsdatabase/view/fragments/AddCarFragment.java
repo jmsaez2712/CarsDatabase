@@ -104,7 +104,7 @@ public class AddCarFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bundle = getArguments();
         initComp(view);
-
+        loadSpinner();
         try{
             car = bundle.getParcelable("car");
             loadEdit();
@@ -126,9 +126,18 @@ public class AddCarFragment extends Fragment {
             ArrayAdapter<Type> adapter =
                     new ArrayAdapter<Type>(this.getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, types);
             this.spType.setAdapter(adapter);
-            try{
-                this.spType.setSelection(car.idtype);
-            } catch (Exception e){}
+            /*FOR EACH COMPARANDO CATEGORIA ENTRE COCHE Y LA DEL LIST DEL LIVE DATA, PARA PONERLO EN EL SPINNER SI EXISTE*/
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                try{
+                    types.forEach((t)->{
+                        if(t.id == car.idtype){
+                            int pos = types.indexOf(t);
+                            spType.setSelection(pos);
+                        }
+                    });
+                } catch (Exception e){}
+
+            }
 
         });
     }
@@ -145,7 +154,6 @@ public class AddCarFragment extends Fragment {
         etDate.setText(car.date);
 
         Log.v("XXX", ""+car.idtype);
-        spType.setSelection(car.idtype);
 
         Glide.with(this).load(Uri.parse(car.url)).into(ivAddCar);
 
